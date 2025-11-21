@@ -1,0 +1,17 @@
+{
+    "manifest_version": 3,
+    "name": "Buscador Masivo v4",
+    "version": "4.0",
+    "description": "Búsquedas masivas con filtros de Google Dorks, grupos inteligentes y URLs personalizadas",
+    "permissions": ["tabs", "tabGroups"],
+    "host_permissions": ["<all_urls>"],
+    "action": {
+        "default_popup": "popup.html",
+        "default_title": "Buscador Masivo v4"
+    },
+    "icons": {
+        "16": "icon.png",
+        "48": "icon.png",
+        "128": "icon.png"
+    }
+}

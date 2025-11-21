@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Buscador Masivo v4.0</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            body {
+                width: 380px;
+                padding: 14px;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+                background: #fff;
+            }
+            h3 {
+                margin-bottom: 14px;
+                text-align: center;
+                color: #1a1a1a;
+                font-size: 17px;
+                font-weight: 600;
+            }
+            label {
+                font-weight: 600;
+                font-size: 12px;
+                display: block;
+                margin-bottom: 5px;
+                color: #444;
+            }
+            textarea,
+            select,
+            input[type='text'] {
+                width: 100%;
+                padding: 9px;
+                margin-bottom: 10px;
+                font-size: 13px;
+                border: 1.5px solid #d1d5db;
+                border-radius: 6px;
+                font-family: inherit;
+                transition: border-color 0.2s;
+            }
+            textarea {
+                height: 120px;
+                resize: vertical;
+                line-height: 1.4;
+            }
+            textarea:focus,
+            select:focus,
+            input[type='text']:focus {
+                outline: none;
+                border-color: #0066ff;
+                box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.1);
+            }
+            input[disabled],
+            select[disabled] {
+                background: #f3f4f6;
+                cursor: not-allowed;
+                color: #6b7280;
+                opacity: 0.7;
+            }
+            button {
+                width: 100%;
+                padding: 12px;
+                background: linear-gradient(135deg, #0066ff 0%, #0052cc 100%);
+                color: white;
+                border: none;
+                font-weight: 600;
+                cursor: pointer;
+                border-radius: 6px;
+                font-size: 14px;
+                transition: all 0.2s;
+                box-shadow: 0 2px 4px rgba(0, 102, 255, 0.2);
+            }
+            button:hover {
+                background: linear-gradient(135deg, #0052cc 0%, #003d99 100%);
+                transform: translateY(-1px);
+            }
+            button:disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+                transform: none;
+            }
+
+            .file-section {
+                margin: 10px 0;
+                padding: 12px;
+                background: #fffbeb;
+                border-radius: 6px;
+                border-left: 3px solid #f59e0b;
+                display: none;
+            }
+            .file-section.active {
+                display: block;
+            }
+            .file-section label {
+                color: #92400e;
+                margin-bottom: 6px;
+            }
+
+            .group-section {
+                margin: 10px 0;
+                padding: 10px;
+                background: #f9fafb;
+                border-radius: 6px;
+                border: 1px solid #e5e7eb;
+            }
+            .group-section input[type='checkbox'] {
+                margin-right: 6px;
+                width: 15px;
+                height: 15px;
+                cursor: pointer;
+            }
+            .group-options {
+                margin-top: 8px;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 6px;
+            }
+
+            #status {
+                margin-top: 10px;
+                font-size: 12px;
+                text-align: center;
+                padding: 8px;
+                border-radius: 5px;
+                font-weight: 500;
+                min-height: 15px;
+            }
+
+            .info {
+                font-size: 10px;
+                color: #6b7280;
+                margin: -6px 0 10px 0;
+                padding: 4px 8px;
+                background: #f9fafb;
+                border-radius: 3px;
+            }
+            .counter {
+                font-size: 11px;
+                color: #0066ff;
+                text-align: right;
+                margin-top: -8px;
+                margin-bottom: 8px;
+            }
+
+            select option {
+                padding: 6px;
+            }
+            optgroup {
+                font-weight: 600;
+            }
+        </style>
+    </head>
+    <body>
+        <h3>🔍 Buscador Masivo v4.0</h3>
+
+        <label>Lista de búsquedas:</label>
+        <textarea
+            id="lista"
+            placeholder="Padre rico, padre pobre&#10;El inversor inteligente&#10;Piense y hágase rico"
+            spellcheck="false"
+        ></textarea>
+        <div class="counter" id="counter">0 búsquedas</div>
+
+        <label>Fuente:</label>
+        <select id="fuente">
+            <option value="">✏️ URL personalizada</option>
+            <option value="https://www.google.com/search?q=">Google</option>
+            <option value="https://es.annas-archive.org/search?q=">Anna's Archive</option>
+            <option value="https://thepiratebay.org/search.php?q=">The Pirate Bay</option>
+            <option value="https://z-library.sk/search?q=">Z-Library</option>
+            <option value="https://libgen.is/search.php?req=">LibGen</option>
+        </select>
+
+        <div id="urlCustom">
+            <label>URL personalizada:</label>
+            <input type="text" id="urlBase" placeholder="https://www.ejemplo.com/search?q=" />
+            <div class="info">Escribe la URL completa hasta el parámetro de búsqueda</div>
+        </div>
+
+        <!-- Sección filetype (solo Google) -->
+        <div class="file-section" id="fileSection">
+            <label>📎 Filtro de archivo (añade filetype:xxx)</label>
+            <select id="filetype">
+                <option value="">Sin filtro</option>
+                <option value="pdf">PDF</option>
+                <option value="doc">DOC</option>
+                <option value="docx">DOCX</option>
+                <option value="xls">XLS</option>
+                <option value="xlsx">XLSX</option>
+                <option value="ppt">PPT</option>
+                <option value="pptx">PPTX</option>
+                <option value="txt">TXT</option>
+                <option value="epub">EPUB</option>
+                <option value="mobi">MOBI</option>
+                <option value="zip">ZIP</option>
+                <option value="rar">RAR</option>
+            </select>
+        </div>
+
+        <div class="group-section">
+            <input type="checkbox" id="grupo" checked />
+            <label for="grupo" style="display: inline; font-weight: 500">Agrupar pestañas</label>
+            <div class="group-options">
+                <input type="text" id="nombreGrupo" placeholder="Nombre" value="Búsqueda" />
+                <select id="colorGrupo">
+                    <option value="blue" selected>🔵 Azul</option>
+                    <option value="red">🔴 Rojo</option>
+                    <option value="green">🟢 Verde</option>
+                    <option value="yellow">🟡 Amarillo</option>
+                    <option value="orange">🟠 Naranja</option>
+                    <option value="purple">🟣 Morado</option>
+                    <option value="pink">🩷 Rosa</option>
+                    <option value="cyan">🔷 Cian</option>
+                    <option value="grey">⚪ Gris</option>
+                </select>
+            </div>
+        </div>
+
+        <button id="btn">🚀 ABRIR PESTAÑAS</button>
+        <div id="status"></div>
+
+        <script src="popup.js"></script>
+        <script>
+            const fuente = document.getElementById('fuente');
+            const urlCustom = document.getElementById('urlCustom');
+            const urlBase = document.getElementById('urlBase');
+            const fileSection = document.getElementById('fileSection');
+            const lista = document.getElementById('lista');
+            const counter = document.getElementById('counter');
+            const grupo = document.getElementById('grupo');
+            const nombreGrupo = document.getElementById('nombreGrupo');
+            const colorGrupo = document.getElementById('colorGrupo');
+
+            // Actualizar visibilidad de campos
+            fuente.addEventListener('change', function () {
+                const isCustom = this.value === '';
+                const isGoogle = this.value.includes('google.com');
+
+                urlCustom.style.display = isCustom ? 'block' : 'none';
+                fileSection.className = isGoogle ? 'file-section active' : 'file-section';
+
+                if (isCustom) urlBase.focus();
+            });
+
+            // Contador de búsquedas
+            lista.addEventListener('input', function () {
+                const lineas = this.value.split('\n').filter((l) => l.trim().length > 0);
+                counter.textContent = `${lineas.length} búsqueda${lineas.length !== 1 ? 's' : ''}`;
+            });
+
+            // Sincronizar opciones de grupo
+            grupo.addEventListener('change', function () {
+                const enabled = this.checked;
+                nombreGrupo.disabled = !enabled;
+                colorGrupo.disabled = !enabled;
+                nombreGrupo.style.opacity = enabled ? '1' : '0.5';
+                colorGrupo.style.opacity = enabled ? '1' : '0.5';
+            });
+
+            // Inicializar - URL personalizada por defecto
+            fuente.value = '';
+            urlBase.focus();
+        </script>
+    </body>
+</html>
