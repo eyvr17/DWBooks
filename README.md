@@ -1,4 +1,4 @@
-# BookMass Searcher v3
+# BookMass Searcher v4
 
 A blazing-fast Chrome extension to **search dozens of books instantly** on Anna’s Archive, The Pirate Bay, LibGen, Ocean of PDF, Z-Library, Mobilism and more — all opened in a **perfectly colored tab group** with one click.
 
@@ -21,7 +21,7 @@ git clone https://github.com/eyvr17/DWBooks.git
 
 # 2. Enter the folder
 
-`cd DWBooks/DWBooks-v3`
+`cd DWBooks/DWBooks-v4`
 
 # 3. Open Chrome → chrome://extensions/
 
@@ -53,7 +53,7 @@ git clone https://github.com/eyvr17/DWBooks.git
 
 ### Files included (everything you need)
 
-• `manifest.json` – perfect Manifest V3  
+• `manifest.json` – perfect Manifest v4  
 • `popup.html` – clean interface with your favorites on top  
 • `popup.js` – rock-solid code (Nov 2025 fixes)  
 • `icon.png` – sharp 128×128 icon
