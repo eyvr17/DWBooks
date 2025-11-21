@@ -67,7 +67,7 @@ git clone https://github.com/eyvr17/DWBooks.git
 [![Sponsor](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=ff69b4&link=https://github.com/sponsors/eyvr17)](https://github.com/sponsors/eyvr17)
 
 **Author:** [@eyvr17](https://github.com/eyvr17)  
-**Version:** 3.0 (November 2025)  
+**Version:** 4.0 (November 2025)  
 **License:** Free forever for personal use & modification
 
 Made with love for book hunters worldwide — happy reading!
