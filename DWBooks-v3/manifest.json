@@ -1,0 +1,21 @@
+{
+    "manifest_version": 3,
+    "name": "Buscador Masivo de Libros + Grupos",
+    "version": "3.0",
+    "description": "Busca listas de libros en Anna's, TPB, LibGen y abre todo en grupo de pestañas",
+
+    "permissions": ["tabs", "tabGroups"],
+
+    "host_permissions": ["<all_urls>"],
+
+    "action": {
+        "default_popup": "popup.html",
+        "default_title": "Buscador Masivo"
+    },
+
+    "icons": {
+        "16": "icon.png",
+        "48": "icon.png",
+        "128": "icon.png"
+    }
+}

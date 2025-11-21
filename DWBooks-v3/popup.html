@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { width: 360px; padding: 12px; font-family: Arial, sans-serif; }
+    textarea, select, input { width: 100%; padding: 8px; margin-bottom: 10px; font-size: 13px; box-sizing: border-box; }
+    textarea { height: 130px; }
+    button { width: 100%; padding: 12px; background: #0066ff; color: white; border: none; font-weight: bold; cursor: pointer; }
+    button:hover { background: #0052cc; }
+    label { font-weight: bold; font-size: 13px; display: block; margin-bottom: 4px; }
+    .checkbox { margin: 10px 0; font-size: 13px; }
+    #status { margin-top: 10px; font-size: 12px; text-align: center; }
+  </style>
+</head>
+<body>
+  <h3 style="margin:0 0 10px 0; text-align:center;">Buscador Masivo + Grupo</h3>
+  
+  <label>Pega la lista (una por línea):</label>
+  <textarea id="lista" placeholder="Los secretos de la mente millonaria&#10;Padre rico, padre pobre"></textarea>
+  
+  <label>Fuente rápida:</label>
+  <select id="fuenteSelect" onchange="actualizarURL()">
+    <option value="">-- Selecciona o escribe manualmente --</option>
+    <optgroup label="★★★ TUS FAVORITOS ★★★">
+      <option value="https://es.annas-archive.org/search?q=">Anna's Archive</option>
+      <option value="https://thepiratebay.org/search.php?q=">The Pirate Bay</option>
+      <option value="https://oceanofpdf.com/?s=">Ocean of PDF</option>
+      <option value="https://forum.mobilism.org/search.php?keywords=">Mobilism</option>
+      <option value="https://z-library.sk/search?q=">Z-Library</option>
+      <option value="https://libgen.is/search.php?req=">LibGen</option>
+      <option value="https://1337x.to/search/">1337x</option>
+    </optgroup>
+    <optgroup label="Otros">
+      <option value="https://www.google.com/search?q=">Google</option>
+      <option value="https://www.amazon.com/s?k=">Amazon</option>
+    </optgroup>
+  </select>
+  
+  <label>URL personalizada:</label>
+  <input type="text" id="urlBase" value="https://es.annas-archive.org/search?q=">
+  
+  <div class="checkbox">
+    <input type="checkbox" id="crearGrupo" checked> <label for="crearGrupo">Abrir en grupo de pestañas</label><br>
+    <input type="text" id="nombreGrupo" placeholder="Nombre del grupo (ej: Libros 2025)" value="Búsqueda Libros">
+    <select id="colorGrupo">
+      <option value="grey">Gris</option>
+      <option value="blue" selected>Azul</option>
+      <option value="red">Rojo</option>
+      <option value="yellow">Amarillo</option>
+      <option value="green">Verde</option>
+      <option value="pink">Rosa</option>
+      <option value="purple">Morado</option>
+      <option value="cyan">Cian</option>
+      <option value="orange">Naranja</option>
+    </select>
+  </div>
+  
+  <button id="buscarBtn">ABRIR TODAS LAS PESTAÑAS</button>
+  <div id="status"></div>
+
+  <script src="popup.js"></script>
+  <script>
+    function actualizarURL() {
+      const sel = document.getElementById('fuenteSelect');
+      const input = document.getElementById('urlBase');
+      if (sel.value) input.value = sel.value;
+    }
+    window.onload = () => {
+      document.getElementById('fuenteSelect').value = "https://es.annas-archive.org/search?q=";
+      actualizarURL();
+    };
+  </script>
+</body>
+</html>
